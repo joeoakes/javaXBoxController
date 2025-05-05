@@ -2,6 +2,7 @@
 //You need the Jar file added to the project
 
 import net.java.games.input.Controller;
+import net.java.games.input.Component;
 import net.java.games.input.ControllerEnvironment;
 import net.java.games.input.Event;
 import net.java.games.input.EventQueue;
@@ -46,9 +47,26 @@ public class XboxControllerReader {
                 }
 
                 // Print joystick movement (optional)
-                if (value != 0.0f && !componentName.contains("Button")) {
-                    System.out.printf("Moved %s to %.2f%n", componentName, value);
+                //if (value != 0.0f && !componentName.contains("Button")) {
+                  //  System.out.printf("Moved %s to %.2f%n", componentName, value);
+                //}
+
+                Component comp = event.getComponent();
+
+                // Left analog stick (X and Y axes)
+                if (comp.getIdentifier() == Component.Identifier.Axis.X) {
+                    System.out.println("Left Stick X: " + value);
+                } else if (comp.getIdentifier() == Component.Identifier.Axis.Y) {
+                    System.out.println("Left Stick Y: " + value);
                 }
+
+                // Right analog stick (X and Y axes)
+                else if (comp.getIdentifier() == Component.Identifier.Axis.RX) {
+                    System.out.println("Right Stick X: " + value);
+                } else if (comp.getIdentifier() == Component.Identifier.Axis.RY) {
+                    System.out.println("Right Stick Y: " + value);
+                }
+
             }
 
             // Sleep briefly to reduce CPU usage
